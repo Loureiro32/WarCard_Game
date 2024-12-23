@@ -15,39 +15,22 @@ public class Cards {
         StringBuilder matchCards = new StringBuilder();
 
         switch (rank){
-            case 1:
-                matchCards.append("Jack");
-                break;
-            case 2:
-                matchCards.append("Ace");
-                break;
-            case 3:
-                matchCards.append("Queen");
-                break;
-            case 4:
-                matchCards.append("King");
-                break;
-            default:
-                matchCards.append(rank);
-                break;
+            case 1 -> matchCards.append("Jack");
+            case 2 -> matchCards.append("Ace");
+            case 3 -> matchCards.append("Queen");
+            case 4 -> matchCards.append("King");
+            default -> matchCards.append(rank);
         }
 
         matchCards.append(" of ");
 
         switch (suit){
-            case 11:
-                matchCards.append("Hearts");
-                break;
-            case 12:
-                matchCards.append("Diamonds");
-                break;
-            case 13:
-                matchCards.append("Clubs");
-                break;
-            case 14:
-                matchCards.append("Spades");
-                break;
+            case 10 -> matchCards.append("Hearts");
+            case 11 -> matchCards.append("Diamonds");
+            case 12 -> matchCards.append("Clubs");
+            case 13 -> matchCards.append("Spades");
         }
+
        return matchCards.toString();
     }
 
