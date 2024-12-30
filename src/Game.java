@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import Enums.InitialMenu;
 import java.util.Scanner;
 
 public class Game {
@@ -7,7 +6,13 @@ public class Game {
     public static final String EXIT_COLOR = "\u001B[31m";
     public static final String RESET_COLOR = "\u001B[0m";
 
-    List<Players> playersList = new ArrayList<Players>();
+    protected Player[] player = new Player[2];
+
+    public Game(){
+        this.player[0] = new Player("Hugo");
+        this.player[1] = new Player("Ricardo");
+
+    }
 
     public void play(){}
 

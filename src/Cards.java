@@ -9,7 +9,6 @@ public class Cards {
         this.rank = rank;
     }
 
-
     @Override
     public String toString() {
         StringBuilder matchCards = new StringBuilder();
@@ -30,7 +29,6 @@ public class Cards {
             case 12 -> matchCards.append("Clubs");
             case 13 -> matchCards.append("Spades");
         }
-
        return matchCards.toString();
     }
 
