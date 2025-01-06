@@ -9,12 +9,12 @@ public class Game {
     public static final String GREEN_COLOR = "\u001B[32m";
     public static final String RED_COLOR = "\u001B[31m";
     public static final String RESET_COLOR = "\u001B[0m";
-
+    private final int roundCounter = 0;
     protected Player[] player = new Player[2];
 
     public Game() {
         this.player[0] = new Player("Hugo");
-        this.player[1] = new Player("Ricardo");
+        this.player[1] = new Player("Loureiro");
 
     }
 
@@ -33,11 +33,12 @@ public class Game {
 
         List<Card> cardDeck = new ArrayList<>();
 
-        for (int x = 0; x < 13; x++) {
+        for (int x = 2; x < 15; x++) {
             for (int y = 0; y < 4; y++) {
                 cardDeck.add(new Card(x, y));
             }
         }
+        System.out.println(cardDeck.size());
 
         Collections.shuffle(cardDeck);
         List<Card> deck1 = new ArrayList<>(cardDeck.subList(0, cardDeck.size() / 2));
@@ -53,13 +54,19 @@ public class Game {
     }
 
 
-    public void round(Player player1, Player player2){
-        System.out.println(player1.faceCard());
-        System.out.println(player2.faceCard());
-        while(player1.getCardsList() !=null || player2.getCardsList() != null ){
-
-            // System.out.println(   player1.getCardsList().getFirst());
-        }
+    public void round(Player player1, Player player2) {
+        System.out.println(player1.getRank());
+        System.out.println(player2.getRank());
+//        while (player1.getCardsList() != null || player2.getCardsList() != null) {
+//            System.out.println(roundCounter);
+//            System.out.println("Player " + player1.getName() + " place " + player1.faceCard());
+//            System.out.println("Player " + player2.getName() + " place " + player2.faceCard());
+//            if (player1.getRank() > player2.getRank()) {
+//
+//            }
+//            roundCounter++;
+//
+//        }
     }
 
     public void menu() {
