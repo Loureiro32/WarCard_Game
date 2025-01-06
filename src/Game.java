@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Game {
-    public static final String PLAY_COLOR = "\u001B[32m";
-    public static final String EXIT_COLOR = "\u001B[31m";
+    public static final String GREEN_COLOR = "\u001B[32m";
+    public static final String RED_COLOR = "\u001B[31m";
     public static final String RESET_COLOR = "\u001B[0m";
 
     protected Player[] player = new Player[2];
@@ -22,8 +22,8 @@ public class Game {
         Player player1 = player[0];
         Player player2 = player[1];
 
-        System.out.println(PLAY_COLOR + player1.getName() + RESET_COLOR + EXIT_COLOR + " VS "
-                + RESET_COLOR + PLAY_COLOR + player2.getName() + RESET_COLOR);
+        System.out.println(GREEN_COLOR + player1.getName() + RESET_COLOR + RED_COLOR + " VS "
+                + RESET_COLOR + GREEN_COLOR + player2.getName() + RESET_COLOR);
 
         giveCards(player1, player2);
     }
@@ -46,15 +46,27 @@ public class Game {
         player1.setCardsList(deck1);
         player2.setCardsList(deck2);
 
-        System.out.println(PLAY_COLOR + player1.getName() + " --> " + RESET_COLOR + player1.getCardsList());
-        System.out.println(PLAY_COLOR + player2.getName() + " --> " + RESET_COLOR + player2.getCardsList());
+        System.out.println(GREEN_COLOR + player1.getName() + " DECK -->" + RESET_COLOR + player1.getCardsList());
+        System.out.println(RED_COLOR + player2.getName() + " DECK -->" + RESET_COLOR + player2.getCardsList());
+
+        round(player1, player2);
+    }
+
+
+    public void round(Player player1, Player player2){
+        System.out.println(player1.faceCard());
+        System.out.println(player2.faceCard());
+        while(player1.getCardsList() !=null || player2.getCardsList() != null ){
+
+            // System.out.println(   player1.getCardsList().getFirst());
+        }
     }
 
     public void menu() {
 
         Scanner input = new Scanner(System.in);
-        System.out.println(PLAY_COLOR + " PLAY " + RESET_COLOR + "\n"
-                + EXIT_COLOR + " EXIT" + RESET_COLOR);
+        System.out.println(GREEN_COLOR + " PLAY " + RESET_COLOR + "\n"
+                + RED_COLOR + " EXIT" + RESET_COLOR);
 
         String userInput = input.nextLine().toUpperCase();
         InitialMenu choice = InitialMenu.valueOf(userInput);

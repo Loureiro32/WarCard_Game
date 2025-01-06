@@ -17,6 +17,11 @@ public class Player {
         return cardsList;
     }
 
+    public String faceCard(){
+       String faceCard = String.valueOf(getCardsList().getFirst());
+        return faceCard;
+    }
+
     public void setCardsList(List<Card> cardsList) {
         this.cardsList = cardsList;
     }
