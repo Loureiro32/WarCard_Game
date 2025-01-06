@@ -22,7 +22,7 @@ public class Card {
             case 9 -> matchCards.append("9");
             case 10 -> matchCards.append("10");
             case 11 -> matchCards.append("A");
-            case 12 -> matchCards.append("12");
+            case 12 -> matchCards.append("J");
             case 13 -> matchCards.append("Q");
             case 14 -> matchCards.append("K");
         }

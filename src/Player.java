@@ -21,9 +21,9 @@ public class Player {
         this.cardsList = cardsList;
     }
 
-    public int getRank() {
-        int getRank = getCardsList().getFirst().getRank();
-        return getRank;
+    public int playerCard() {
+        int playerCard = getCardsList().getFirst().getRank();
+        return playerCard;
     }
 
     public String faceCard() {
