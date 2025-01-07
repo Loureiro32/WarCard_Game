@@ -21,33 +21,26 @@ public class Game {
     public void startGame() {
         Player player1 = player[0];
         Player player2 = player[1];
+        List<Card> cardDeck = new ArrayList<>();
 
         System.out.println(GREEN_COLOR + player1.getName() + RESET_COLOR + RED_COLOR + " VS "
                 + RESET_COLOR + GREEN_COLOR + player2.getName() + RESET_COLOR);
 
-        giveCards(player1, player2);
-        round(player1, player2);
+        try {
+            initialDeck(cardDeck);
+            shuffleDeck(cardDeck);
+            giveCards(player1, player2, cardDeck);
+            round(player1, player2);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
+    public void giveCards(Player player1, Player player2, List<Card> initialDeck) {
 
-    public void giveCards(Player player1, Player player2) {
-        //! new method InitialDeck
-        List<Card> cardDeck = new ArrayList<>();
-
-        for (int x = 2; x < 15; x++) {
-            for (int y = 0; y < 4; y++) {
-                cardDeck.add(new Card(x, y));
-            }
-        }
-        System.out.println(cardDeck.size());
-
-        //! --------###------
-
-        shuffleDeck(cardDeck);
-
-        int deckSize = cardDeck.size() / 2;
-        List<Card> deck1 = new ArrayList<>(cardDeck.subList(0, deckSize));
-        List<Card> deck2 = new ArrayList<>(cardDeck.subList(deckSize, cardDeck.size()));
+        int deckSize = initialDeck.size() / 2;
+        List<Card> deck1 = new ArrayList<>(initialDeck.subList(0, deckSize));
+        List<Card> deck2 = new ArrayList<>(initialDeck.subList(deckSize, initialDeck.size()));
 
         player1.setCardsList(deck1);
         player2.setCardsList(deck2);
@@ -57,12 +50,19 @@ public class Game {
 
     }
 
+    public void initialDeck(List<Card> initialDeck) {
+        for (int x = 2; x < 15; x++) {
+            for (int y = 0; y < 4; y++) {
+                initialDeck.add(new Card(x, y));
+            }
+        }
+    }
+
     public void shuffleDeck(List<Card> deck) {
         Collections.shuffle(deck);
     }
 
-
-    public void round(Player player1, Player player2) {
+    public void round(Player player1, Player player2) throws InterruptedException {
         while (player1.getCardsList() != null || player2.getCardsList() != null) {
 
             System.out.println("Round : " + roundCounter);
@@ -74,24 +74,17 @@ public class Game {
                 player1.getCardsList().removeFirst();
                 player1.getCardsList().addLast(player2.getCardsList().getFirst());
                 player2.getCardsList().removeFirst();
-                System.out.println(player1.getCardsList().size());
-                System.out.println(player2.getCardsList().size());
-
             } else if (player2.playerCard() > player1.playerCard()) {
                 player2.getCardsList().addLast(player2.getCardsList().getFirst());
                 player2.getCardsList().removeFirst();
                 player2.getCardsList().addLast(player1.getCardsList().getFirst());
                 player1.getCardsList().removeFirst();
-                System.out.println(player1.getCardsList().size());
-                System.out.println(player2.getCardsList().size());
             }
-
             if (player1.playerCard() == player2.playerCard()) {
 
             }
-
+            Thread.sleep(1000);
             roundCounter++;
-            break;
         }
     }
 
@@ -107,6 +100,7 @@ public class Game {
         switch (choice) {
             case PLAY -> startGame();
             case EXIT -> System.exit(1);
+            case LOAD -> System.out.println("Coming Soon");
         }
     }
 

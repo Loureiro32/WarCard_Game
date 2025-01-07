@@ -4,5 +4,6 @@ public enum InitialMenu {
     PLAY,
     EXIT,
     PAUSE,
-    SAVE
+    SAVE,
+    LOAD
 }
