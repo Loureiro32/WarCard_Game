@@ -30,21 +30,16 @@ public class Card {
         matchCards.append(" ");
 
         switch (suit) {
-            case 0 -> matchCards.append("❤");
-            case 1 -> matchCards.append("◆");
-            case 2 -> matchCards.append("♣");
-            case 3 -> matchCards.append("♠");
+            case 0 -> matchCards.append(Colors.RED + "❤" + Colors.Default);
+            case 1 -> matchCards.append(Colors.RED + "◆" + Colors.Default);
+            case 2 -> matchCards.append(Colors.BLACK + "♣" + Colors.Default);
+            case 3 -> matchCards.append(Colors.BLACK + "♠" + Colors.Default);
         }
         return matchCards.toString();
     }
 
     public int getRank() {
         return rank;
-    }
-
-
-    public int getSuit() {
-        return suit;
     }
 
 }

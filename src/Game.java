@@ -6,10 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Game {
-    public static final String GREEN_COLOR = "\u001B[32m";
-    public static final String RED_COLOR = "\u001B[31m";
-    public static final String RESET_COLOR = "\u001B[0m";
-    protected Player[] player = new Player[2];
+    private Player[] player = new Player[2];
     private int roundCounter = 0;
 
     public Game() {
@@ -23,8 +20,8 @@ public class Game {
         Player player2 = player[1];
         List<Card> cardDeck = new ArrayList<>();
 
-        System.out.println(GREEN_COLOR + player1.getName() + RESET_COLOR + RED_COLOR + " VS "
-                + RESET_COLOR + GREEN_COLOR + player2.getName() + RESET_COLOR);
+        System.out.println(Colors.GREEN + player1.getName() + Colors.Default + Colors.RED + " VS "
+                + Colors.Default + Colors.GREEN + player2.getName() + Colors.Default);
 
         try {
             initialDeck(cardDeck);
@@ -45,8 +42,8 @@ public class Game {
         player1.setCardsList(deck1);
         player2.setCardsList(deck2);
 
-        System.out.println(GREEN_COLOR + player1.getName() + " DECK -->" + RESET_COLOR + player1.getCardsList());
-        System.out.println(RED_COLOR + player2.getName() + " DECK -->" + RESET_COLOR + player2.getCardsList());
+        System.out.println(Colors.GREEN + player1.getName() + " DECK -->" + Colors.Default + player1.getCardsList());
+        System.out.println(Colors.RED + player2.getName() + " DECK -->" + Colors.Default + player2.getCardsList());
 
     }
 
@@ -63,36 +60,46 @@ public class Game {
     }
 
     public void round(Player player1, Player player2) throws InterruptedException {
-        while (player1.getCardsList() != null || player2.getCardsList() != null) {
+        while (true) {
 
             System.out.println("Round : " + roundCounter);
-            System.out.println("Player " + player1.getName() + " place " + player1.faceCard());
-            System.out.println("Player " + player2.getName() + " place " + player2.faceCard());
-
+            System.out.println(player1.getName() + " place " + player1.faceCard());
+            System.out.println(player2.getName() + " place " + player2.faceCard());
             if (player1.playerCard() > player2.playerCard()) {
-                player1.getCardsList().addLast(player1.getCardsList().getFirst());
-                player1.getCardsList().removeFirst();
-                player1.getCardsList().addLast(player2.getCardsList().getFirst());
-                player2.getCardsList().removeFirst();
+                changeDeckCards(player1, player2);
             } else if (player2.playerCard() > player1.playerCard()) {
-                player2.getCardsList().addLast(player2.getCardsList().getFirst());
-                player2.getCardsList().removeFirst();
-                player2.getCardsList().addLast(player1.getCardsList().getFirst());
-                player1.getCardsList().removeFirst();
+                changeDeckCards(player2, player1);
             }
-            if (player1.playerCard() == player2.playerCard()) {
+//            if (player1.playerCard() == player2.playerCard()) {
+//
+//            }
 
+            if (player1.getCardsList().size() <= 3) {
+                System.out.println(player2.getName() + " Wins!");
+                break;
+            }
+            if (player2.getCardsList().size() <= 3) {
+                System.out.println(player1.getName() + " Wins!");
+                break;
             }
             Thread.sleep(1000);
             roundCounter++;
         }
     }
 
+    public void changeDeckCards(Player roundWinner, Player roundLoser) {
+        roundWinner.getCardsList().addLast(roundWinner.getCardsList().getFirst());
+        roundWinner.getCardsList().removeFirst();
+        roundWinner.getCardsList().addLast(roundLoser.getCardsList().getFirst());
+        roundLoser.getCardsList().removeFirst();
+    }
+
     public void menu() {
 
         Scanner input = new Scanner(System.in);
-        System.out.println(GREEN_COLOR + " PLAY " + RESET_COLOR + "\n"
-                + RED_COLOR + " EXIT" + RESET_COLOR);
+        System.out.println(Colors.GREEN + " PLAY " + Colors.Default + "\n"
+                + Colors.RED + " EXIT " + Colors.Default + "\n"
+                + Colors.PURPLE + " LOAD " + Colors.Default);
 
         String userInput = input.nextLine().toUpperCase();
         InitialMenu choice = InitialMenu.valueOf(userInput);
