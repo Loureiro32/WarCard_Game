@@ -21,13 +21,12 @@ public class Player {
         this.cardsList = cardsList;
     }
 
-    public int playerCard() {
-        int playerCard = getCardsList().getFirst().getRank();
-        return playerCard;
-    }
-
     public String faceCard() {
         String faceCard = String.valueOf(getCardsList().getFirst());
         return faceCard;
+    }
+
+    public Card pickCard() {
+        return cardsList.getFirst();
     }
 }
