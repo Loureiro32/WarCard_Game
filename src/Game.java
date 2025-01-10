@@ -24,7 +24,7 @@ public class Game {
         initialDeck(cardDeck);
         shuffleDeck(cardDeck);
         giveCards(cardDeck);
-        round(player1, player2);
+        round();
     }
 
     private void initialDeck(List<Card> initialDeck) {
@@ -52,8 +52,8 @@ public class Game {
         System.out.println(Colors.RED + player2.getName() + " DECK -->" + Colors.Default + player2.getCardsList());
     }
 
-    public void round(Player player1, Player player2) {
-        while (true) {
+    public void round() {
+        while (!player1.getCardsList().isEmpty() || !player2.getCardsList().isEmpty()) {
 
             System.out.println("Round : " + roundCounter);
             System.out.println(player1.getName() + " place " + player1.faceCard());
@@ -67,12 +67,10 @@ public class Game {
                 System.out.println("It's a tie! Contesting the tie...");
                 contestTie(player1, player2);
             }
-
             if (player1.getCardsList().size() <= 3) {
                 System.out.println(player2.getName() + " Wins!");
                 break;
-            }
-            if (player2.getCardsList().size() <= 3) {
+            } else if (player2.getCardsList().size() <= 3) {
                 System.out.println(player1.getName() + " Wins!");
                 break;
             }
@@ -95,20 +93,8 @@ public class Game {
         player1WarCards.add(player1.getCardsList().getFirst());
         player2WarCards.add(player2.getCardsList().getFirst());
 
-        for (int i = 0; i < 3; i++) {
-            Card p1Card = player1.getCardsList().getFirst();
-            Card p2Card = player2.getCardsList().getFirst();
-            player1.getCardsList().removeFirst();
-            player2.getCardsList().removeFirst();
+        tieTakeCard(player1WarCards, player2WarCards);
 
-            if (p1Card != null) {
-                player1WarCards.add(p1Card);
-
-            }
-            if (p2Card != null) {
-                player2WarCards.add(p2Card);
-            }
-        }
         Card lastCard1 = player1WarCards.getLast();
         Card lastCard2 = player2WarCards.getLast();
 
@@ -129,6 +115,23 @@ public class Game {
         } else {
             System.out.println("Other Tie");
             contestTie(player1, player2);
+        }
+    }
+
+    private void tieTakeCard(List<Card> player1WarCards, List<Card> player2WarCards) {
+        for (int i = 0; i < 3; i++) {
+            Card p1Card = player1.getCardsList().getFirst();
+            Card p2Card = player2.getCardsList().getFirst();
+            player1.getCardsList().removeFirst();
+            player2.getCardsList().removeFirst();
+
+            if (p1Card != null) {
+                player1WarCards.add(p1Card);
+
+            }
+            if (p2Card != null) {
+                player2WarCards.add(p2Card);
+            }
         }
     }
 
