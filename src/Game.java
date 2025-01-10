@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Game {
-    private Player player1;
-    private Player player2;
+    private final Player player1;
+    private final Player player2;
     private int roundCounter = 0;
 
     public Game() {
@@ -80,7 +80,7 @@ public class Game {
         }
     }
 
-    public void changeDeckCards(Player winner, Player loser) {
+    private void changeDeckCards(Player winner, Player loser) {
         winner.getCardsList().addLast(winner.getCardsList().getFirst());
         winner.getCardsList().removeFirst();
         winner.getCardsList().addLast(loser.getCardsList().getFirst());
@@ -88,7 +88,7 @@ public class Game {
 
     }
 
-    public static void contestTie(Player player1, Player player2) {
+    private void contestTie(Player player1, Player player2) {
         List<Card> player1WarCards = new ArrayList<>();
         List<Card> player2WarCards = new ArrayList<>();
 
