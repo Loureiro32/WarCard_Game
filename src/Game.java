@@ -64,7 +64,8 @@ public class Game {
                 changeDeckCards(player2, player1);
             }
             if (player1.pickCard() == player2.pickCard()) {
-                changeDeckCards(player1, player2);
+                System.out.println("It's a tie! Contesting the tie...");
+                contestTie(player1, player2);
             }
 
             if (player1.getCardsList().size() <= 3) {
@@ -87,6 +88,50 @@ public class Game {
 
     }
 
+    public static void contestTie(Player player1, Player player2) {
+        List<Card> player1WarCards = new ArrayList<>();
+        List<Card> player2WarCards = new ArrayList<>();
+
+        player1WarCards.add(player1.getCardsList().getFirst());
+        player2WarCards.add(player2.getCardsList().getFirst());
+
+        for (int i = 0; i < 3; i++) {
+            Card p1Card = player1.getCardsList().getFirst();
+            Card p2Card = player2.getCardsList().getFirst();
+            player1.getCardsList().removeFirst();
+            player2.getCardsList().removeFirst();
+
+            if (p1Card != null) {
+                player1WarCards.add(p1Card);
+
+            }
+            if (p2Card != null) {
+                player2WarCards.add(p2Card);
+            }
+        }
+        Card lastCard1 = player1WarCards.getLast();
+        Card lastCard2 = player2WarCards.getLast();
+
+        if (lastCard1.getRank() > lastCard2.getRank()) {
+            System.out.println(player1.getName() + " place " + player1WarCards.getLast());
+            System.out.println(player2.getName() + " place " + player2WarCards.getLast());
+            System.out.println(player1.getName() + " wins the tie!");
+            player1.getCardsList().addAll(player1WarCards);
+            player1.getCardsList().addAll(player2WarCards);
+
+        } else if (lastCard1.getRank() < lastCard2.getRank()) {
+            System.out.println(player1.getName() + " place " + player1WarCards.getLast());
+            System.out.println(player2.getName() + " place " + player2WarCards.getLast());
+            System.out.println(player2.getName() + " wins the tie!");
+            player2.getCardsList().addAll(player1WarCards);
+            player2.getCardsList().addAll(player2WarCards);
+
+        } else {
+            System.out.println("Other Tie");
+            contestTie(player1, player2);
+        }
+    }
+
     public void menu() {
 
         Scanner input = new Scanner(System.in);
@@ -103,5 +148,4 @@ public class Game {
             case LOAD -> System.out.println("Coming Soon");
         }
     }
-
 }

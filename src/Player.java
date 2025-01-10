@@ -22,8 +22,7 @@ public class Player {
     }
 
     public String faceCard() {
-        String faceCard = String.valueOf(getCardsList().getFirst());
-        return faceCard;
+        return String.valueOf(getCardsList().getFirst());
     }
 
     public int pickCard() {
