@@ -28,7 +28,7 @@
 
 ## 🧐 About <a name = "about"></a>
 
-The project comes with the purpose of simulating the simple card war game in java
+The project comes with the purpose of simulating the simple card war game in java using all the logic and knowledge acquired in this past months.
 
 ## 🎈 Usage <a name="usage"></a>
 
